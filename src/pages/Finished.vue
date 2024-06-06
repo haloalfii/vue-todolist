@@ -1,10 +1,24 @@
 <template>
     <div class="card rounded-3 shadow-sm">
-        <Header text="Finished Task" />
+        <Header
+            title="Finished Task"
+            @reloadData="
+                () => {
+                    getData();
+                }
+            "
+        />
 
         <div class="card-body px-4 border-top">
             <Navigation />
-            <ItemList :todos="todos" />
+            <ItemList
+                :todos="todos"
+                @reloadData="
+                    () => {
+                        getData();
+                    }
+                "
+            />
         </div>
 
         <Footer :length="todos.length" />
@@ -27,14 +41,23 @@ export default {
 
     data() {
         return {
-            todos: [
-                {
-                    text: "Belajar HTML",
-                    status: 1,
-                    created_at: "2024-06-06",
-                },
-            ],
+            todos: [],
         };
+    },
+
+    mounted() {
+        this.getData();
+    },
+
+    methods: {
+        async getData() {
+            try {
+                const res = await this.axios.get(
+                    "http://localhost:8000/todos?status=1"
+                );
+                this.todos = res.data;
+            } catch (error) {}
+        },
     },
 };
 </script>

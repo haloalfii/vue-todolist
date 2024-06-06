@@ -2,7 +2,7 @@
     <div class="card-body px-4">
         <div class="d-flex justify-content-between align-items-center">
             <div>
-                <p class="fw-medium mb-0 fs-6">{{ text }}</p>
+                <p class="fw-medium mb-0 fs-6">{{ title }}</p>
                 <span class="text-secondary fs-12px">Alfian</span>
             </div>
 
@@ -18,10 +18,11 @@
             </button>
         </div>
 
-        <form v-if="show">
+        <form @submit.prevent="handleSubmit" v-if="show">
             <div class="mb-3 mt-3">
                 <label for="todo" class="form-label fs-14px">New Task</label>
                 <input
+                    v-model="text"
                     type="text"
                     placeholder="Tambahkan Task Baru"
                     class="form-control fs-14px"
@@ -35,7 +36,7 @@
 <script>
 export default {
     props: {
-        text: {
+        title: {
             type: String,
         },
     },
@@ -43,11 +44,28 @@ export default {
     data() {
         return {
             show: false,
-            payload: {
-                text: "",
-                status: 0,
-            },
+            text: "",
         };
+    },
+
+    methods: {
+        async handleSubmit() {
+            try {
+                const res = await this.axios.post(
+                    "http://localhost:8000/todos",
+                    {
+                        text: this.text,
+                        created_at: this.$dayjs().format(
+                            "DD MMMM YYYY : HH:mm"
+                        ),
+                        status: 0,
+                    }
+                );
+
+                this.text = "";
+                this.$emit("reloadData");
+            } catch (error) {}
+        },
     },
 };
 </script>

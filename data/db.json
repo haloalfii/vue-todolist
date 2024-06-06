@@ -1,0 +1,16 @@
+{
+  "todos": [
+    {
+      "text": "Belajar Vue Js",
+      "created_at": "2024-06-06",
+      "status": 1,
+      "id": "9293"
+    },
+    {
+      "id": "bbf7",
+      "text": "Makan",
+      "created_at": "06 June 2024 : 23:28",
+      "status": 0
+    }
+  ]
+}

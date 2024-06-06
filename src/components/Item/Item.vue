@@ -14,8 +14,27 @@
                 </div>
 
                 <div class="w-auto">
-                    <i v-if="todo.status == 0" class="fa-regular fa-circle"></i>
                     <i
+                        @click="
+                            handleEdit(
+                                todo.id,
+                                todo.text,
+                                todo.created_at,
+                                todo.status
+                            )
+                        "
+                        v-if="todo.status == 0"
+                        class="fa-regular fa-circle"
+                    ></i>
+                    <i
+                        @click="
+                            handleEdit(
+                                todo.id,
+                                todo.text,
+                                todo.created_at,
+                                todo.status
+                            )
+                        "
                         v-else-if="todo.status == 1"
                         class="fa-solid fa-circle-check text-success"
                     ></i>
@@ -34,11 +53,14 @@
                     }"
                     >{{ todo.status == 0 ? "Available" : "Finished" }}</span
                 >
-                <span class="fs-12px"> Created At 2024-03-02</span>
+                <span class="fs-12px"> Created At {{ todo.created_at }}</span>
             </div>
 
             <div class="w-auto">
-                <i class="fa-solid fa-trash-can text-danger"></i>
+                <i
+                    @click="handleDelete(todo.id)"
+                    class="fa-solid fa-trash-can text-danger"
+                ></i>
             </div>
         </div>
     </div>
@@ -49,6 +71,38 @@ export default {
     props: {
         todo: {
             type: Object,
+        },
+    },
+
+    methods: {
+        async handleDelete(id) {
+            try {
+                const res = await this.axios.delete(
+                    "http://localhost:8000/todos/" + id
+                );
+
+                this.$emit("reloadData");
+            } catch (error) {}
+        },
+
+        async handleEdit(id, text, created_at, status) {
+            try {
+                if (status == 0) {
+                    var statusData = 1;
+                } else {
+                    var statusData = 0;
+                }
+
+                const res = await this.axios.put(
+                    "http://localhost:8000/todos/" + id,
+                    {
+                        text: text,
+                        created_at: created_at,
+                        status: statusData,
+                    }
+                );
+                this.$emit("reloadData");
+            } catch (error) {}
         },
     },
 };
