@@ -1,7 +1,9 @@
 <script setup>
-import HelloWorld from "./components/HelloWorld.vue";
+import Index from "./components/Index.vue";
 </script>
 
 <template>
-    <HelloWorld msg="Halo Dunia" />
+    <div class="container mt-5 mb-5">
+        <Index />
+    </div>
 </template>
