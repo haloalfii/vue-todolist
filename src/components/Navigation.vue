@@ -1,17 +1,21 @@
 <template>
     <div class="d-flex align-items-center">
-        <a href="#" class="me-3 d-flex align-items-center">
+        <RouterLink to="/" class="me-3 d-flex align-items-center">
             <p class="mb-0">All</p>
             <span class="badge text-bg-primary rounded-circle ms-1">4</span>
-        </a>
+        </RouterLink>
 
-        <a href="#" class="me-3 d-flex align-items-center">
+        <RouterLink
+            to="/finish"
+            href="#"
+            class="me-3 d-flex align-items-center"
+        >
             <p class="mb-0">Finished</p>
-        </a>
+        </RouterLink>
 
-        <a href="#" class="me-3 d-flex align-items-center">
+        <RouterLink to="/available" class="me-3 d-flex align-items-center">
             <p class="mb-0">Available</p>
-        </a>
+        </RouterLink>
     </div>
 </template>
 

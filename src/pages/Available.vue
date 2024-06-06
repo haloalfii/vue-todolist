@@ -1,6 +1,6 @@
 <template>
     <div class="card rounded-3 shadow-sm">
-        <Header text="Today's Task" />
+        <Header text="Available Task" />
 
         <div class="card-body px-4 border-top">
             <Navigation />
@@ -31,11 +31,6 @@ export default {
                 {
                     text: "Belajar Vue Js",
                     status: 0,
-                    created_at: "2024-06-06",
-                },
-                {
-                    text: "Belajar HTML",
-                    status: 1,
                     created_at: "2024-06-06",
                 },
             ],

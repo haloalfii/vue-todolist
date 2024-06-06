@@ -2,7 +2,7 @@
     <div class="card-body px-4">
         <div class="d-flex justify-content-between align-items-center">
             <div>
-                <p class="fw-medium mb-0 fs-6">Today's Task</p>
+                <p class="fw-medium mb-0 fs-6">{{ text }}</p>
                 <span class="text-secondary fs-12px">Alfian</span>
             </div>
 
@@ -34,6 +34,12 @@
 
 <script>
 export default {
+    props: {
+        text: {
+            type: String,
+        },
+    },
+
     data() {
         return {
             show: false,
